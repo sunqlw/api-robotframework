@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.1 (Python 3.7.4 on win32)" generated="20200813 17:14:30.598" rpa="false">
+<suite id="s1" name="Datahub4.0.8" source="D:\sqlw_test\robotframework\datahub4.0.8">
+<suite id="s1-s1" name="测试用例" source="D:\sqlw_test\robotframework\datahub4.0.8\测试用例">
+<suite id="s1-s1-s1" name="01-登录" source="D:\sqlw_test\robotframework\datahub4.0.8\测试用例\01-登录.robot">
+<test id="s1-s1-s1-t1" name="001-登录">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>http=http://127.0.0.1:8888</arg>
+</arguments>
+<assign>
+<var>${proxies}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.050" level="INFO">${proxies} = {'http': 'http://127.0.0.1:8888'}</msg>
+<status status="PASS" starttime="20200813 17:14:31.049" endtime="20200813 17:14:31.050"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>api</arg>
+<arg>http://demo202.test.com:8070</arg>
+<arg>proxies=${proxies}</arg>
+</arguments>
+<msg timestamp="20200813 17:14:31.051" level="INFO">Creating Session using : alias=api, url=http://demo202.test.com:8070, headers={},                     cookies={}, auth=None, timeout=None, proxies={'http': 'http://127.0.0.1:8888'}, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200813 17:14:31.050" endtime="20200813 17:14:31.051"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>/leapid-admin/api/v1/login</arg>
+</arguments>
+<assign>
+<var>${test_uri}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.052" level="INFO">${test_uri} = /leapid-admin/api/v1/login</msg>
+<status status="PASS" starttime="20200813 17:14:31.052" endtime="20200813 17:14:31.052"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>un=datahub</arg>
+<arg>pw=datahub123</arg>
+</arguments>
+<assign>
+<var>&amp;{test_params}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.054" level="INFO">&amp;{test_params} = { un=datahub | pw=datahub123 }</msg>
+<status status="PASS" starttime="20200813 17:14:31.053" endtime="20200813 17:14:31.054"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/x-www-form-urlencoded; charset=UTF-8</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.054" level="INFO">${headers} = {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}</msg>
+<status status="PASS" starttime="20200813 17:14:31.054" endtime="20200813 17:14:31.055"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${test_uri}</arg>
+<arg>data=${test_params}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.356" level="INFO">POST Request : url=http://demo202.test.com:8070/leapid-admin/api/v1/login 
+ path_url=/leapid-admin/api/v1/login 
+ headers={'User-Agent': 'python-requests/2.24.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8', 'Content-Length': '24'} 
+ body=un=datahub&amp;pw=datahub123 
+ </msg>
+<msg timestamp="20200813 17:14:31.356" level="INFO">POST Response : url=http://demo202.test.com:8070/leapid-admin/api/v1/login 
+ status=200, reason=OK 
+ body={"data":{"address":"","created":1595916142500,"department":"","email":"","hashing":"sha","id":23,"password":"hEDFHM52nWNRhacXlMDPfx0uQe4~","phone":"","project2Group":{"47":"p47_g45"},"project2Pools":{"47":{"impala":"default","spark":"default","yarn":"default"}},"project2ProxyUser":{"47":"p47_u23_datahub"},"realname":"林文","roles":"leapid.admin","state":0,"strength":30,"username":"datahub"},"msg":"","result":0} 
+ </msg>
+<msg timestamp="20200813 17:14:31.357" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200813 17:14:31.055" endtime="20200813 17:14:31.357"></status>
+</kw>
+<tags>
+<tag>test</tag>
+</tags>
+<status status="PASS" starttime="20200813 17:14:31.047" endtime="20200813 17:14:31.358" critical="yes"></status>
+</test>
+<test id="s1-s1-s1-t2" name="002-获取项目id">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>/datahub/leapid/projects</arg>
+</arguments>
+<assign>
+<var>${test_uri}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.372" level="INFO">${test_uri} = /datahub/leapid/projects</msg>
+<status status="PASS" starttime="20200813 17:14:31.371" endtime="20200813 17:14:31.372"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${test_uri}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.782" level="INFO">GET Request : url=http://demo202.test.com:8070/datahub/leapid/projects 
+ path_url=/datahub/leapid/projects 
+ headers={'User-Agent': 'python-requests/2.24.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Cookie': '_lpt_=6ce134ebd3264df4885955c0bf7ff390; _sid_=6ce134ebd3264df4885955c0bf7ff390'} 
+ body=None 
+ </msg>
+<msg timestamp="20200813 17:14:31.782" level="INFO">GET Response : url=http://demo202.test.com:8070/datahub/leapid/projects 
+ status=200, reason=OK 
+ body={"code":200,"model":{"47":{"id":47,"name":"datahub-项目一","description":"","dbs":"datahub03,datahub01,datahub02","creator":"leapadmin","created":1595916900558,"yarnPool":"default","sparkPool":"default","impalaPool":"default","memberCount":0,"proxyUser":"p47_u23_datahub"}}} 
+ </msg>
+<msg timestamp="20200813 17:14:31.782" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200813 17:14:31.373" endtime="20200813 17:14:31.782"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<assign>
+<var>${status_code}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.783" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20200813 17:14:31.783" endtime="20200813 17:14:31.783"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${response.text}</arg>
+</arguments>
+<assign>
+<var>${text}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.784" level="INFO">${text} = {"code":200,"model":{"47":{"id":47,"name":"datahub-项目一","description":"","dbs":"datahub03,datahub01,datahub02","creator":"leapadmin","created":1595916900558,"yarnPool":"default","sparkPool":"default",...</msg>
+<status status="PASS" starttime="20200813 17:14:31.784" endtime="20200813 17:14:31.784"></status>
+</kw>
+<kw name="Get Json Value" library="HttpLibrary.HTTP">
+<doc>Get the target node of the JSON document `json_string` specified by `json_pointer`.</doc>
+<arguments>
+<arg>${text}</arg>
+<arg>/model</arg>
+</arguments>
+<assign>
+<var>${model}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.785" level="INFO">${model} = {"47": {"id": 47, "name": "datahub-项目一", "description": "", "dbs": "datahub03,datahub01,datahub02", "creator": "leapadmin", "created": 1595916900558, "yarnPool": "default", "sparkPool": "default", "im...</msg>
+<status status="PASS" starttime="20200813 17:14:31.785" endtime="20200813 17:14:31.785"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${model}</arg>
+</arguments>
+<assign>
+<var>${model}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.787" level="INFO">To JSON using : content={"47": {"id": 47, "name": "datahub-项目一", "description": "", "dbs": "datahub03,datahub01,datahub02", "creator": "leapadmin", "created": 1595916900558, "yarnPool": "default", "sparkPool": "default", "impalaPool": "default", "memberCount": 0, "proxyUser": "p47_u23_datahub"}} </msg>
+<msg timestamp="20200813 17:14:31.787" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20200813 17:14:31.787" level="INFO">${model} = {'47': {'id': 47, 'name': 'datahub-项目一', 'description': '', 'dbs': 'datahub03,datahub01,datahub02', 'creator': 'leapadmin', 'created': 1595916900558, 'yarnPool': 'default', 'sparkPool': 'default', 'im...</msg>
+<status status="PASS" starttime="20200813 17:14:31.786" endtime="20200813 17:14:31.787"></status>
+</kw>
+<kw name="Get Dictionary Keys" library="Collections">
+<doc>Returns keys of the given ``dictionary`` as a list.</doc>
+<arguments>
+<arg>${model}</arg>
+</arguments>
+<assign>
+<var>${pids}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.788" level="INFO">${pids} = ['47']</msg>
+<status status="PASS" starttime="20200813 17:14:31.788" endtime="20200813 17:14:31.789"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${pids}</arg>
+</arguments>
+<assign>
+<var>${GLOBAL_PIDS}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.790" level="INFO">${GLOBAL_PIDS} = ['47']</msg>
+<status status="PASS" starttime="20200813 17:14:31.789" endtime="20200813 17:14:31.790"></status>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<arguments>
+<arg>${GLOBAL_PIDS}</arg>
+<arg>Evaluate</arg>
+<arg>list(map(int,${pids}))</arg>
+</arguments>
+<status status="PASS" starttime="20200813 17:14:31.790" endtime="20200813 17:14:31.791"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${GLOBAL_PIDS}</arg>
+</arguments>
+<msg timestamp="20200813 17:14:31.794" level="INFO">${GLOBAL_PIDS} = ['47']</msg>
+<status status="PASS" starttime="20200813 17:14:31.793" endtime="20200813 17:14:31.794"></status>
+</kw>
+<tags>
+<tag>test</tag>
+</tags>
+<status status="PASS" starttime="20200813 17:14:31.367" endtime="20200813 17:14:31.796" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20200813 17:14:30.644" endtime="20200813 17:14:31.800"></status>
+</suite>
+<suite id="s1-s1-s2" name="02-新建资源" source="D:\sqlw_test\robotframework\datahub4.0.8\测试用例\02-新建资源.robot">
+<kw name="Run Keywords" library="BuiltIn" type="setup">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>Kw Get Current Day</arg>
+<arg>AND</arg>
+<arg>Data For Add Res</arg>
+</arguments>
+<kw name="Kw Get Current Day" library="通用模块">
+<kw name="Get Current Date" library="DateTime">
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<assign>
+<var>${date}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.843" level="INFO">${date} = 2020-08-13 17:14:31.843</msg>
+<status status="PASS" starttime="20200813 17:14:31.839" endtime="20200813 17:14:31.843"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${date}</arg>
+<arg>0</arg>
+<arg>-4</arg>
+</arguments>
+<assign>
+<var>${current_date}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.844" level="INFO">${current_date} = 2020-08-13 17:14:31</msg>
+<status status="PASS" starttime="20200813 17:14:31.843" endtime="20200813 17:14:31.844"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${current_date}</arg>
+</arguments>
+<msg timestamp="20200813 17:14:31.845" level="INFO">${current_date} = 2020-08-13 17:14:31</msg>
+<status status="PASS" starttime="20200813 17:14:31.844" endtime="20200813 17:14:31.845"></status>
+</kw>
+<status status="PASS" starttime="20200813 17:14:31.838" endtime="20200813 17:14:31.846"></status>
+</kw>
+<kw name="Data For Add Res" library="数据模块">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>host=172.17.202.145</arg>
+<arg>port=3306</arg>
+<arg>url=jdbc:mysql://172.17.202.145:3306</arg>
+<arg>user=datahub</arg>
+<arg>password=datahub</arg>
+<arg>params=[]</arg>
+<arg>otherParams={}</arg>
+</arguments>
+<assign>
+<var>${mysqlParams}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.847" level="INFO">${mysqlParams} = {'host': '172.17.202.145', 'port': '3306', 'url': 'jdbc:mysql://172.17.202.145:3306', 'user': 'datahub', 'password': 'datahub', 'params': '[]', 'otherParams': '{}'}</msg>
+<status status="PASS" starttime="20200813 17:14:31.846" endtime="20200813 17:14:31.847"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>host=172.17.202.145</arg>
+<arg>port=1521</arg>
+<arg>url=jdbc:oracle:thin:@//172.17.202.145:1521</arg>
+<arg>user=lenovo</arg>
+<arg>password=123456</arg>
+<arg>params=[{"name":"sid","value":"ora11","extend":false}]</arg>
+<arg>otherParams={"sid":"ora11"}</arg>
+</arguments>
+<assign>
+<var>${oracleParams}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.848" level="INFO">${oracleParams} = {'host': '172.17.202.145', 'port': '1521', 'url': 'jdbc:oracle:thin:@//172.17.202.145:1521', 'user': 'lenovo', 'password': '123456', 'params': '[{"name":"sid","value":"ora11","extend":false}]', 'other...</msg>
+<status status="PASS" starttime="20200813 17:14:31.847" endtime="20200813 17:14:31.848"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>host=172.17.202.239</arg>
+<arg>port=1433</arg>
+<arg>url=jdbc:sqlserver://172.17.202.239:1433</arg>
+<arg>user=sa</arg>
+<arg>password=leap@123</arg>
+<arg>params=[]</arg>
+<arg>otherParams={}</arg>
+</arguments>
+<assign>
+<var>${sqlserverParams}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.848" level="INFO">${sqlserverParams} = {'host': '172.17.202.239', 'port': '1433', 'url': 'jdbc:sqlserver://172.17.202.239:1433', 'user': 'sa', 'password': 'leap@123', 'params': '[]', 'otherParams': '{}'}</msg>
+<status status="PASS" starttime="20200813 17:14:31.848" endtime="20200813 17:14:31.848"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>host=172.17.202.145</arg>
+<arg>port=50000</arg>
+<arg>url=jdbc:db2://172.17.202.145:50000</arg>
+<arg>user=dbtowuo</arg>
+<arg>password=Lenovo@2017</arg>
+<arg>params=[{"name":"sid","value":"lenovo","extend":false}]</arg>
+<arg>otherParams={"sid":"lenovo"}</arg>
+</arguments>
+<assign>
+<var>${db2Params}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.849" level="INFO">${db2Params} = {'host': '172.17.202.145', 'port': '50000', 'url': 'jdbc:db2://172.17.202.145:50000', 'user': 'dbtowuo', 'password': 'Lenovo@2017', 'params': '[{"name":"sid","value":"lenovo","extend":false}]', 'other...</msg>
+<status status="PASS" starttime="20200813 17:14:31.849" endtime="20200813 17:14:31.849"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>host=172.17.202.145</arg>
+<arg>port=5432</arg>
+<arg>url=jdbc:postgresql://172.17.202.145:5432</arg>
+<arg>user=lenovo2</arg>
+<arg>password=Lenovo@2017</arg>
+<arg>params=[]</arg>
+<arg>otherParams={}</arg>
+</arguments>
+<assign>
+<var>${postgresqlParams}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.850" level="INFO">${postgresqlParams} = {'host': '172.17.202.145', 'port': '5432', 'url': 'jdbc:postgresql://172.17.202.145:5432', 'user': 'lenovo2', 'password': 'Lenovo@2017', 'params': '[]', 'otherParams': '{}'}</msg>
+<status status="PASS" starttime="20200813 17:14:31.849" endtime="20200813 17:14:31.850"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>host=172.17.202.145</arg>
+<arg>port=21</arg>
+<arg>url=ftp://172.17.202.145:21</arg>
+<arg>user=datahub</arg>
+<arg>password=datahub</arg>
+<arg>params=[{"name":"protocol","value":"FTP","extend":false}]</arg>
+<arg>otherParams={"protocol":"FTP"}</arg>
+</arguments>
+<assign>
+<var>${ftpParams}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.851" level="INFO">${ftpParams} = {'host': '172.17.202.145', 'port': '21', 'url': 'ftp://172.17.202.145:21', 'user': 'datahub', 'password': 'datahub', 'params': '[{"name":"protocol","value":"FTP","extend":false}]', 'otherParams': '{"p...</msg>
+<status status="PASS" starttime="20200813 17:14:31.850" endtime="20200813 17:14:31.851"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>host=172.17.202.145</arg>
+<arg>port=22</arg>
+<arg>url=ftp://172.17.202.145:22</arg>
+<arg>user=datahub</arg>
+<arg>password=datahub</arg>
+<arg>params=[{"name":"protocol","value":"SFTP","extend":false}]</arg>
+<arg>otherParams={"protocol":"SFTP"}</arg>
+</arguments>
+<assign>
+<var>${sftpParams}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.851" level="INFO">${sftpParams} = {'host': '172.17.202.145', 'port': '22', 'url': 'ftp://172.17.202.145:22', 'user': 'datahub', 'password': 'datahub', 'params': '[{"name":"protocol","value":"SFTP","extend":false}]', 'otherParams': '{"...</msg>
+<status status="PASS" starttime="20200813 17:14:31.851" endtime="20200813 17:14:31.851"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>params=[{"name":"secretKey","value":"jK4m+JaNHft4HKCO7EqSl1lMAq5CkSwoDtoOrgAj","extend":false},{"name":"region","value":"cn-north-1","extend":false},{"name":"accessKey","value":"AKIAP4MOVNBFMWGNR4IA","extend":false}]</arg>
+<arg>otherParams={"secretKey":"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","region":"cn-north-1","accessKey":"AKIAP4MOVNBFMWGNR4IA"}</arg>
+</arguments>
+<assign>
+<var>${s3Params}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.852" level="INFO">${s3Params} = {'params': '[{"name":"secretKey","value":"jK4m+JaNHft4HKCO7EqSl1lMAq5CkSwoDtoOrgAj","extend":false},{"name":"region","value":"cn-north-1","extend":false},{"name":"accessKey","value":"AKIAP4MOVNBFMWGNR...</msg>
+<status status="PASS" starttime="20200813 17:14:31.851" endtime="20200813 17:14:31.852"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${mysqlParams}</arg>
+</arguments>
+<msg timestamp="20200813 17:14:31.852" level="INFO">${mysqlParams} = {'host': '172.17.202.145', 'port': '3306', 'url': 'jdbc:mysql://172.17.202.145:3306', 'user': 'datahub', 'password': 'datahub', 'params': '[]', 'otherParams': '{}'}</msg>
+<status status="PASS" starttime="20200813 17:14:31.852" endtime="20200813 17:14:31.853"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${oracleParams}</arg>
+</arguments>
+<msg timestamp="20200813 17:14:31.853" level="INFO">${oracleParams} = {'host': '172.17.202.145', 'port': '1521', 'url': 'jdbc:oracle:thin:@//172.17.202.145:1521', 'user': 'lenovo', 'password': '123456', 'params': '[{"name":"sid","value":"ora11","extend":false}]', 'other...</msg>
+<status status="PASS" starttime="20200813 17:14:31.853" endtime="20200813 17:14:31.853"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${sqlserverParams}</arg>
+</arguments>
+<msg timestamp="20200813 17:14:31.855" level="INFO">${sqlserverParams} = {'host': '172.17.202.239', 'port': '1433', 'url': 'jdbc:sqlserver://172.17.202.239:1433', 'user': 'sa', 'password': 'leap@123', 'params': '[]', 'otherParams': '{}'}</msg>
+<status status="PASS" starttime="20200813 17:14:31.854" endtime="20200813 17:14:31.855"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${db2Params}</arg>
+</arguments>
+<msg timestamp="20200813 17:14:31.856" level="INFO">${db2Params} = {'host': '172.17.202.145', 'port': '50000', 'url': 'jdbc:db2://172.17.202.145:50000', 'user': 'dbtowuo', 'password': 'Lenovo@2017', 'params': '[{"name":"sid","value":"lenovo","extend":false}]', 'other...</msg>
+<status status="PASS" starttime="20200813 17:14:31.855" endtime="20200813 17:14:31.856"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${postgresqlParams}</arg>
+</arguments>
+<msg timestamp="20200813 17:14:31.857" level="INFO">${postgresqlParams} = {'host': '172.17.202.145', 'port': '5432', 'url': 'jdbc:postgresql://172.17.202.145:5432', 'user': 'lenovo2', 'password': 'Lenovo@2017', 'params': '[]', 'otherParams': '{}'}</msg>
+<status status="PASS" starttime="20200813 17:14:31.856" endtime="20200813 17:14:31.857"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${ftpParams}</arg>
+</arguments>
+<msg timestamp="20200813 17:14:31.857" level="INFO">${ftpParams} = {'host': '172.17.202.145', 'port': '21', 'url': 'ftp://172.17.202.145:21', 'user': 'datahub', 'password': 'datahub', 'params': '[{"name":"protocol","value":"FTP","extend":false}]', 'otherParams': '{"p...</msg>
+<status status="PASS" starttime="20200813 17:14:31.857" endtime="20200813 17:14:31.858"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${sftpParams}</arg>
+</arguments>
+<msg timestamp="20200813 17:14:31.858" level="INFO">${sftpParams} = {'host': '172.17.202.145', 'port': '22', 'url': 'ftp://172.17.202.145:22', 'user': 'datahub', 'password': 'datahub', 'params': '[{"name":"protocol","value":"SFTP","extend":false}]', 'otherParams': '{"...</msg>
+<status status="PASS" starttime="20200813 17:14:31.858" endtime="20200813 17:14:31.858"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${s3Params}</arg>
+</arguments>
+<msg timestamp="20200813 17:14:31.859" level="INFO">${s3Params} = {'params': '[{"name":"secretKey","value":"jK4m+JaNHft4HKCO7EqSl1lMAq5CkSwoDtoOrgAj","extend":false},{"name":"region","value":"cn-north-1","extend":false},{"name":"accessKey","value":"AKIAP4MOVNBFMWGNR...</msg>
+<status status="PASS" starttime="20200813 17:14:31.858" endtime="20200813 17:14:31.859"></status>
+</kw>
+<status status="PASS" starttime="20200813 17:14:31.846" endtime="20200813 17:14:31.859"></status>
+</kw>
+<status status="PASS" starttime="20200813 17:14:31.838" endtime="20200813 17:14:31.859"></status>
+</kw>
+<test id="s1-s1-s2-t1" name="新建mysql资源">
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${mysqlParams}</arg>
+<arg>host</arg>
+</arguments>
+<assign>
+<var>${host}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.862" level="INFO">${host} = 172.17.202.145</msg>
+<status status="PASS" starttime="20200813 17:14:31.862" endtime="20200813 17:14:31.862"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${mysqlParams}</arg>
+<arg>url</arg>
+</arguments>
+<assign>
+<var>${url}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.863" level="INFO">${url} = jdbc:mysql://172.17.202.145:3306</msg>
+<status status="PASS" starttime="20200813 17:14:31.863" endtime="20200813 17:14:31.863"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${mysqlParams}</arg>
+<arg>port</arg>
+</arguments>
+<assign>
+<var>${port}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.865" level="INFO">${port} = 3306</msg>
+<status status="PASS" starttime="20200813 17:14:31.864" endtime="20200813 17:14:31.865"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${mysqlParams}</arg>
+<arg>user</arg>
+</arguments>
+<assign>
+<var>${user}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.866" level="INFO">${user} = datahub</msg>
+<status status="PASS" starttime="20200813 17:14:31.866" endtime="20200813 17:14:31.867"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${mysqlParams}</arg>
+<arg>password</arg>
+</arguments>
+<assign>
+<var>${password}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.868" level="INFO">${password} = datahub</msg>
+<status status="PASS" starttime="20200813 17:14:31.867" endtime="20200813 17:14:31.868"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${mysqlParams}</arg>
+<arg>params</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.870" level="INFO">${params} = []</msg>
+<status status="PASS" starttime="20200813 17:14:31.869" endtime="20200813 17:14:31.870"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${mysqlParams}</arg>
+<arg>otherParams</arg>
+</arguments>
+<assign>
+<var>${otherParams}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.872" level="INFO">${otherParams} = {}</msg>
+<status status="PASS" starttime="20200813 17:14:31.871" endtime="20200813 17:14:31.872"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${GLOBAL_RES_TYPE}</arg>
+<arg>mysql</arg>
+</arguments>
+<assign>
+<var>${resType}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.873" level="INFO">${resType} = 38</msg>
+<status status="PASS" starttime="20200813 17:14:31.873" endtime="20200813 17:14:31.873"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${GLOBAL_PIDS}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${pid}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.875" level="INFO">${pid} = 47</msg>
+<status status="PASS" starttime="20200813 17:14:31.874" endtime="20200813 17:14:31.875"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>mysql_byrf_${current_date}</arg>
+</arguments>
+<assign>
+<var>${resName}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.877" level="INFO">${resName} = mysql_byrf_2020-08-13 17:14:31</msg>
+<status status="PASS" starttime="20200813 17:14:31.876" endtime="20200813 17:14:31.877"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>20</arg>
+</arguments>
+<assign>
+<var>${maxConnectionSize}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.879" level="INFO">${maxConnectionSize} = 20</msg>
+<status status="PASS" starttime="20200813 17:14:31.878" endtime="20200813 17:14:31.879"></status>
+</kw>
+<kw name="Api Res Add" library="资源管理模块">
+<doc>| Name | res add |
+| Author | sunqinglinwen |
+| Date | 2020-08-04 |
+| Update | 2020-08-06 |
+| *描述:* 资源新增
+| *请求方式:*post
+| *格式:* ${status_code} | ${text} | res add | 47= | 38= | mysql_byrf_2020-08-13 17:14:31= | []= | {}=| 20= | 172.17.202.145= | 3306= | jdbc:mysql://172.17.202.145:3306= | datahub= | datahub=
+| *输入：*
+| 47 | 项目id，必填
+| 38 | 资源类型，必填
+| mysql_byrf_2020-08-13 17:14:31 | 资源名，必填
+| [] | 参数，必填
+| {} | 其他参数，必填
+| 20 | 最大连接数，必填
+| 172.17.202.145 | 资源连接服务地址，非必填
+| 3306 | 资源连接端口，非必填
+| jdbc:mysql://172.17.202.145:3306 | 资源连接url，非必填
+| datahub | 用户名，非必填
+| datahub | 密码，非必填
+| *输出：*
+| ${status_code} | 接口返回状态码
+| ${text} | 接口返回消息体，json格式
+| *备注：*
+| 注意新建hdfs资源和其他资源的区别
+| 增加了最大连接数</doc>
+<arguments>
+<arg>host=${host}</arg>
+<arg>url=${url}</arg>
+<arg>port=${port}</arg>
+<arg>user=${user}</arg>
+<arg>password=${password}</arg>
+<arg>resName=${resName}</arg>
+<arg>pid=${pid}</arg>
+<arg>resType=${resType}</arg>
+<arg>maxConnectionSize=${maxConnectionSize}</arg>
+<arg>params=${params}</arg>
+<arg>otherParams=${otherParams}</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+<var>${text}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>host=${host}</arg>
+<arg>url=${url}</arg>
+<arg>port=${port}</arg>
+<arg>user=${user}</arg>
+<arg>password=${password}</arg>
+<arg>resName=${resName}</arg>
+<arg>pid=${pid}</arg>
+<arg>resType=${resType}</arg>
+<arg>maxConnectionSize=${maxConnectionSize}</arg>
+<arg>params=${params}</arg>
+<arg>otherParams=${otherParams}</arg>
+</arguments>
+<assign>
+<var>&amp;{data}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.889" level="INFO">&amp;{data} = { host=172.17.202.145 | url=jdbc:mysql://172.17.202.145:3306 | port=3306 | user=datahub | password=datahub | resName=mysql_byrf_2020-08-13 17:14:31 | pid=47 | resType=38 | maxConnectionSize=20 | param...</msg>
+<status status="PASS" starttime="20200813 17:14:31.887" endtime="20200813 17:14:31.889"></status>
+</kw>
+<kw name="Pop Key By Empty" library="deal_dictionary">
+<arguments>
+<arg>${data}</arg>
+</arguments>
+<assign>
+<var>&amp;{data}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.890" level="INFO">&amp;{data} = { host=172.17.202.145 | url=jdbc:mysql://172.17.202.145:3306 | port=3306 | user=datahub | password=datahub | resName=mysql_byrf_2020-08-13 17:14:31 | pid=47 | resType=38 | maxConnectionSize=20 | param...</msg>
+<status status="PASS" starttime="20200813 17:14:31.889" endtime="20200813 17:14:31.890"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/x-www-form-urlencoded</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20200813 17:14:31.890" level="INFO">${headers} = {'Content-Type': 'application/x-www-form-urlencoded'}</msg>
+<status status="PASS" starttime="20200813 17:14:31.890" endtime="20200813 17:14:31.890"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>api</arg>
+<arg>${uri_prefix}/res/add</arg>
+<arg>data=${data}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20200813 17:14:32.172" level="INFO">POST Request : url=http://demo202.test.com:8070/datahub/res/add 
+ path_url=/datahub/res/add 
+ headers={'User-Agent': 'python-requests/2.24.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/x-www-form-urlencoded', 'Cookie': '_lpt_=6ce134ebd3264df4885955c0bf7ff390; _sid_=6ce134ebd3264df4885955c0bf7ff390', 'Content-Length': '221'} 
+ body=host=172.17.202.145&amp;url=jdbc%3Amysql%3A%2F%2F172.17.202.145%3A3306&amp;port=3306&amp;user=datahub&amp;password=datahub&amp;resName=mysql_byrf_2020-08-13+17%3A14%3A31&amp;pid=47&amp;resType=38&amp;maxConnectionSize=20&amp;params=%5B%5D&amp;otherParams=%7B%7D 
+ </msg>
+<msg timestamp="20200813 17:14:32.173" level="INFO">POST Response : url=http://demo202.test.com:8070/datahub/res/add 
+ status=200, reason=OK 
+ body={"code":200,"model":{"id":10311,"createTime":"2020-08-13T09:16:41.000+0000","updateTime":"2020-08-13T09:16:41.000+0000","pid":47,"resName":"mysql_byrf_2020-08-13 17:14:31","type":{"id":38,"groupId":1,"name":"MySQL","driver":"com.mysql.jdbc.Driver","defaultDb":"","description":"MySQL","support":true},"url":"jdbc:mysql://172.17.202.145:3306","user":"datahub","password":"datahub","host":"172.17.202.145","port":3306,"status":0,"maxConnectionSize":20,"params":[]}} 
+ </msg>
+<msg timestamp="20200813 17:14:32.173" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200813 17:14:31.890" endtime="20200813 17:14:32.173"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<assign>
+<var>${status_code}</var>
+</assign>
+<msg timestamp="20200813 17:14:32.174" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20200813 17:14:32.173" endtime="20200813 17:14:32.174"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${response.text}</arg>
+</arguments>
+<assign>
+<var>${text}</var>
+</assign>
+<msg timestamp="20200813 17:14:32.174" level="INFO">${text} = {"code":200,"model":{"id":10311,"createTime":"2020-08-13T09:16:41.000+0000","updateTime":"2020-08-13T09:16:41.000+0000","pid":47,"resName":"mysql_byrf_2020-08-13 17:14:31","type":{"id":38,"groupId":1,...</msg>
+<status status="PASS" starttime="20200813 17:14:32.174" endtime="20200813 17:14:32.174"></status>
+</kw>
+<msg timestamp="20200813 17:14:32.175" level="INFO">${code} = 200</msg>
+<msg timestamp="20200813 17:14:32.175" level="INFO">${text} = {"code":200,"model":{"id":10311,"createTime":"2020-08-13T09:16:41.000+0000","updateTime":"2020-08-13T09:16:41.000+0000","pid":47,"resName":"mysql_byrf_2020-08-13 17:14:31","type":{"id":38,"groupId":1,...</msg>
+<status status="PASS" starttime="20200813 17:14:31.884" endtime="20200813 17:14:32.175"></status>
+</kw>
+<kw name="Check Add Res Successful" library="资源管理模块">
+<doc>| Name | Check Add Res Successful |
+| Author | sunqinglinwen |
+| Date | 2020-08-11 |
+| Update | 2020-08-11 |
+| *描述:* 通过资源名判断新增资源是否成功
+| *请求方式:*post
+| *格式:* Check Add Res Successful | 200 | {"code":200,"model":{"id":10311,"createTime":"2020-08-13T09:16:41.000+0000","updateTime":"2020-08-13T09:16:41.000+0000","pid":47,"resName":"mysql_byrf_2020-08-13 17:14:31","type":{"id":38,"groupId":1,"name":"MySQL","driver":"com.mysql.jdbc.Driver","defaultDb":"","description":"MySQL","support":true},"url":"jdbc:mysql://172.17.202.145:3306","user":"datahub","password":"datahub","host":"172.17.202.145","port":3306,"status":0,"maxConnectionSize":20,"params":[]}} | mysql_byrf_2020-08-13 17:14:31
+| *输入：*
+| 200 | 接口响应码，必填
+| {"code":200,"model":{"id":10311,"createTime":"2020-08-13T09:16:41.000+0000","updateTime":"2020-08-13T09:16:41.000+0000","pid":47,"resName":"mysql_byrf_2020-08-13 17:14:31","type":{"id":38,"groupId":1,"name":"MySQL","driver":"com.mysql.jdbc.Driver","defaultDb":"","description":"MySQL","support":true},"url":"jdbc:mysql://172.17.202.145:3306","user":"datahub","password":"datahub","host":"172.17.202.145","port":3306,"status":0,"maxConnectionSize":20,"params":[]}} | response的text，必填
+| mysql_byrf_2020-08-13 17:14:31 | 资源名，必填
+| *输出：*
+| 暂无
+| *备注：*
+| 通过对比以下三点来判断新增接口是否调用成功：
+| 对比接口响应码是否为200
+| 对比text里面的code是否为200
+| 对比text里面是否包含资源名</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>${text}</arg>
+<arg>${resName}</arg>
+</arguments>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20200813 17:14:32.177" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200813 17:14:32.177" endtime="20200813 17:14:32.178"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${text}</arg>
+<arg>200</arg>
+</arguments>
+<status status="PASS" starttime="20200813 17:14:32.178" endtime="20200813 17:14:32.178"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${text}</arg>
+<arg>${resName}</arg>
+</arguments>
+<status status="PASS" starttime="20200813 17:14:32.178" endtime="20200813 17:14:32.179"></status>
+</kw>
+<status status="PASS" starttime="20200813 17:14:32.176" endtime="20200813 17:14:32.179"></status>
+</kw>
+<doc>| Name | 新建mysql资源 |
+| Author | sunqinglinwen |
+| Date | 2020-08-12 |
+| Update | 2020-08-12 |</doc>
+<tags>
+<tag>smoke</tag>
+<tag>test</tag>
+</tags>
+<status status="PASS" starttime="20200813 17:14:31.859" endtime="20200813 17:14:32.180" critical="yes"></status>
+</test>
+<doc>该模块主要为了模拟新建资源的操作，包含以下接口的测试用例
+| 接口名称 | 接口地址 |
+| 新建资源 | /res/add |
+| 资源列表 | /res/list |
+| 资源系统参数 | /res/params |
+| 获取s3的regions | /common/select/regions |
+
+</doc>
+<status status="PASS" starttime="20200813 17:14:31.806" endtime="20200813 17:14:32.184"></status>
+</suite>
+<status status="PASS" starttime="20200813 17:14:30.638" endtime="20200813 17:14:32.195"></status>
+</suite>
+<status status="PASS" starttime="20200813 17:14:30.600" endtime="20200813 17:14:32.201"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0">Critical Tests</stat>
+<stat pass="3" fail="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0">smoke</stat>
+<stat pass="3" fail="0">test</stat>
+</tag>
+<suite>
+<stat pass="3" fail="0" id="s1" name="Datahub4.0.8">Datahub4.0.8</stat>
+<stat pass="3" fail="0" id="s1-s1" name="测试用例">Datahub4.0.8.测试用例</stat>
+<stat pass="2" fail="0" id="s1-s1-s1" name="01-登录">Datahub4.0.8.测试用例.01-登录</stat>
+<stat pass="1" fail="0" id="s1-s1-s2" name="02-新建资源">Datahub4.0.8.测试用例.02-新建资源</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
