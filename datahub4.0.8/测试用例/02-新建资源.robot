@@ -125,7 +125,8 @@ Resource          ../资源管理/head.robot
     ...    | Author | sunqinglinwen |
     ...    | Date | 2020-08-12 |
     ...    | Update | 2020-08-12 |
-    [Tags]    skip    smoke
+    [Tags]    skip
+    [Setup]
     # 设置参数
     ${host}    Set Variable    172.17.202.145
     ${url}    Set Variable    jdbc:mysql://172.17.202.145:3306
@@ -357,7 +358,7 @@ Resource          ../资源管理/head.robot
     ${otherParams}    Get From Dictionary    ${mysql_params}    otherParams
     ${resType}    Get From Dictionary    ${GLOBAL_RES_TYPE}    mysql
     ${pid}    Set Variable    10000
-    ${resName}    Set Variable    mysql_byrf_${current_date}
+    ${resName}    Set Variable    mysql资源-pid不存在-${current_date}
     ${maxConnectionSize}    Set Variable    20
     ${code}    ${text}    Api Res Add    host=${host}    url=${url}    port=${port}    user=${user}    password=${password}    resName=${resName}    pid=${pid}    resType=${resType}    maxConnectionSize=${maxConnectionSize}    params=${params}    otherParams=${otherParams}
     # 检查请求是否调用成功
@@ -376,7 +377,7 @@ Resource          ../资源管理/head.robot
     ${otherParams}    Get From Dictionary    ${mysql_params}    otherParams
     ${resType}    Get From Dictionary    ${GLOBAL_RES_TYPE}    mysql
     ${pid}    Set Variable    46
-    ${resName}    Set Variable    mysql_byrf_${current_date}
+    ${resName}    Set Variable    mysql资源-pid没权限-${current_date}
     ${maxConnectionSize}    Set Variable    20
     ${code}    ${text}    Api Res Add    host=${host}    url=${url}    port=${port}    user=${user}    password=${password}    resName=${resName}    pid=${pid}    resType=${resType}    maxConnectionSize=${maxConnectionSize}    params=${params}    otherParams=${otherParams}
     # 检查请求是否调用成功
@@ -417,6 +418,7 @@ Resource          ../资源管理/head.robot
     ...    | Date | 2020-08-12 |
     ...    | Update | 2020-08-12 |
     ...    新建一个mysql资源，但是资源类型是oracle
+    [Tags]    skip
     # 设置参数
     ${host}    Get From Dictionary    ${mysql_params}    host
     ${url}    Get From Dictionary    ${mysql_params}    url
@@ -432,9 +434,11 @@ Resource          ../资源管理/head.robot
     ${code}    ${text}    Api Res Add    host=${host}    url=${url}    port=${port}    user=${user}    password=${password}    resName=${resName}    pid=${pid}    resType=${resType}    maxConnectionSize=${maxConnectionSize}    params=${params}    otherParams=${otherParams}
     # 检查请求是否调用成功
     Should Be Equal As Integers    ${code}    200
-    Should Contain    ${text}    0
+    ${check_code}    Get Json Value    ${text}    /code
+    Should Be Equal As Integers    ${check_code}    0
 
 新建资源参数不正确
+    [Tags]    skip
     # 设置参数
     ${host}    Get From Dictionary    ${mysql_params}    host
     ${url}    Get From Dictionary    ${mysql_params}    url
