@@ -303,6 +303,7 @@ Resource          ../资源管理/head.robot
     Should Not Be Equal    ${list}    []
 
 项目id传空
+    [Tags]    bug    skip
     # 设置参数
     ${pageSize}    Set Variable    10
     ${pageNum}    Set Variable    1

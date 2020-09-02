@@ -6,18 +6,6 @@ Resource          ../资源管理/head.robot
 按资源类型搜索mysql
     搜索资源    0    res_type=mysql
 
-按资源类型搜索oracle
-    0    \    oracle
-
-按资源类型搜索sqlserver
-    0    \    sqlserver
-
-按资源类型搜索postgresql
-    0    \    postgresql
-
-按资源类型搜索db2
-    0    \    db2
-
 *** Keywords ***
 搜索资源
     [Arguments]    ${pid_index}    ${res_name}=${EMPTY}    ${res_type}=${EMPTY}

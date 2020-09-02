@@ -14,7 +14,7 @@ Resource          ../资源管理/head.robot
     ...    | Author | sunqinglinwen |
     ...    | Date | 2020-08-12 |
     ...    | Update | 2020-08-12 |
-    [Tags]    smoke    test
+    [Tags]    smoke
     # 设置参数
     ${host}    Get From Dictionary    ${mysql_params}    host
     ${url}    Get From Dictionary    ${mysql_params}    url
@@ -125,7 +125,7 @@ Resource          ../资源管理/head.robot
     ...    | Author | sunqinglinwen |
     ...    | Date | 2020-08-12 |
     ...    | Update | 2020-08-12 |
-    [Tags]    skip
+    [Tags]    skip    无环境
     [Setup]
     # 设置参数
     ${host}    Set Variable    172.17.202.145
@@ -321,12 +321,15 @@ Resource          ../资源管理/head.robot
     Check Add Res Successful    ${code}    ${text}    ${resName}
 
 新建资源host为空
+    [Tags]    skip
     log    test1
 
 新建资源port为空
+    [Tags]    skip
     log    test1
 
 新建资源url为空
+    [Tags]    skip
     log    test1
 
 新建资源pid为空
@@ -339,7 +342,7 @@ Resource          ../资源管理/head.robot
     ${params}    Get From Dictionary    ${mysql_params}    params
     ${otherParams}    Get From Dictionary    ${mysql_params}    otherParams
     ${resType}    Get From Dictionary    ${GLOBAL_RES_TYPE}    mysql
-    ${resName}    Set Variable    mysql_byrf_${current_date}
+    ${resName}    Set Variable    mysql资源-pid为空-${current_date}
     ${maxConnectionSize}    Set Variable    20
     ${code}    ${text}    Api Res Add    host=${host}    url=${url}    port=${port}    user=${user}    password=${password}    resName=${resName}    resType=${resType}    maxConnectionSize=${maxConnectionSize}    params=${params}    otherParams=${otherParams}
     # 检查请求是否调用成功
@@ -418,7 +421,7 @@ Resource          ../资源管理/head.robot
     ...    | Date | 2020-08-12 |
     ...    | Update | 2020-08-12 |
     ...    新建一个mysql资源，但是资源类型是oracle
-    [Tags]    skip
+    [Tags]    skip    bug
     # 设置参数
     ${host}    Get From Dictionary    ${mysql_params}    host
     ${url}    Get From Dictionary    ${mysql_params}    url
@@ -429,7 +432,7 @@ Resource          ../资源管理/head.robot
     ${otherParams}    Get From Dictionary    ${mysql_params}    otherParams
     ${resType}    Get From Dictionary    ${GLOBAL_RES_TYPE}    oracle
     ${pid}    Get From List    ${GLOBAL_PIDS}    0
-    ${resName}    Set Variable    mysql_byrf_${current_date}
+    ${resName}    Set Variable    新建资源类型不匹配-${current_date}
     ${maxConnectionSize}    Set Variable    20
     ${code}    ${text}    Api Res Add    host=${host}    url=${url}    port=${port}    user=${user}    password=${password}    resName=${resName}    pid=${pid}    resType=${resType}    maxConnectionSize=${maxConnectionSize}    params=${params}    otherParams=${otherParams}
     # 检查请求是否调用成功
@@ -438,7 +441,6 @@ Resource          ../资源管理/head.robot
     Should Be Equal As Integers    ${check_code}    0
 
 新建资源参数不正确
-    [Tags]    skip
     # 设置参数
     ${host}    Get From Dictionary    ${mysql_params}    host
     ${url}    Get From Dictionary    ${mysql_params}    url
@@ -449,10 +451,9 @@ Resource          ../资源管理/head.robot
     ${otherParams}    Get From Dictionary    ${mysql_params}    otherParams
     ${resType}    Get From Dictionary    ${GLOBAL_RES_TYPE}    mysql
     ${pid}    Get From List    ${GLOBAL_PIDS}    0
-    ${resName}    Set Variable    mysql_byrf_${current_date}
+    ${resName}    Set Variable    新建资源密码不正确-${current_date}
     ${maxConnectionSize}    Set Variable    20
     ${code}    ${text}    Api Res Add    host=${host}    url=${url}    port=${port}    user=${user}    password=${password}    resName=${resName}    pid=${pid}    resType=${resType}    maxConnectionSize=${maxConnectionSize}    params=${params}    otherParams=${otherParams}
     # 检查请求是否调用成功
     Should Be Equal As Integers    ${code}    200
-    Should Contain    ${text}    0
     Should Contain    ${text}    Connection test failed

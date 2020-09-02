@@ -3,8 +3,10 @@ Resource          ../资源管理/head.robot
 
 *** Test Cases ***
 启动完整任务
+    [Tags]    skip
 
 启动任务ID不存在的任务
+    [Tags]    skip    bug
     # 设置任务ID
     ${job_id}    Set Variable    10000
     # 发送请求
@@ -15,8 +17,10 @@ Resource          ../资源管理/head.robot
     Should Contain    ${text}    任务ID不存在
 
 启动草稿任务
+    [Tags]    skip
 
 启动没有权限的任务
+    [Tags]    skip    bug
     # 设置任务ID
     ${job_id}    Set Variable    43
     # 发送请求
