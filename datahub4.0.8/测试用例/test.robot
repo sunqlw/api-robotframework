@@ -24,3 +24,6 @@ web自动化
     Comment    log    第二个case
     Comment    Run Keyword Unless    '1' == '2'    log    1
     Comment    Pass Execution if    '1' == '2'    case通过
+
+test
+    log    1223
